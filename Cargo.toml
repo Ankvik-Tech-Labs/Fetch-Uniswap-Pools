@@ -1,0 +1,35 @@
+[package]
+name = "Fetch-Uniswap-Pools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.90"
+csv = "1.3.0"
+ethers = { version = "2.0.14", features = ["abigen", "ws", "ipc"] }
+futures = "0.3.31"
+indicatif = "0.17.8"
+itertools = "0.13.0"
+log = "0.4.22"
+serde = "1.0.210"
+tokio = { version = "1.40.0", features = ["full"]  }
+dotenv = "0.15.0"
+
+# --- For ammrs
+# alloy = { version = "0.5.2", features = ["full"] }
+# amms = { git = "https://github.com/darkforestry/amms-rs.git", features = ["state-space"]}
+# 
+# eyre = "0.6.12"
+# tokio = { version = "1.40", default-features = false, features = [
+#     "rt-multi-thread",
+# ] }
+# tracing-subscriber = "0.3.18"
+# alloy = { version = "0.4", features = [
+#     "contract",
+#     "network",
+#     "provider-ws",
+#     "rpc-types-eth",
+#     "signer-local",
+# ] }
+
+
