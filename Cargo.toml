@@ -14,6 +14,7 @@ log = "0.4.22"
 serde = "1.0.210"
 tokio = { version = "1.40.0", features = ["full"]  }
 dotenv = "0.15.0"
+pool-sync = "2.0.1"
 
 # --- For ammrs
 # alloy = { version = "0.5.2", features = ["full"] }

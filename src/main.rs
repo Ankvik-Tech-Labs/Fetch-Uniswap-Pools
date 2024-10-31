@@ -1,22 +1,22 @@
-mod pools;
-use crate::pools::load_all_pools;
-use anyhow::Result;
-use dotenv::dotenv;
-use std::env;
+use pool_sync::{PoolSync, PoolType, Chain, PoolInfo};
 use std::error;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn error::Error>> {
-    dotenv().ok();
-    let wss_url = env::var("WSS_RPC_URL")?;
+    // Configure and build the PoolSync instance
+    let pool_sync = PoolSync::builder()
+        .add_pool(PoolType::UniswapV2)
+        .chain(Chain::Ethereum)
+        .build()?;
 
-    let (pools, _) = load_all_pools(wss_url.clone(), 10000000, 50000)
-        .await
-        .unwrap();
+    // Synchronize pools
+    let (pools, _last_synced_block) = pool_sync.sync_pools().await?;
 
-    for pool in pools.iter() {
-        pool.pretty_print();
+    // Common Info
+    for pool in &pools {
+        println!("Pool Address {:?}, Token 0: {:?}, Token 1: {:?}", pool.address(), pool.token0_name(), pool.token1_name());
     }
 
+    println!("Synced {} pools!", pools.len());
     Ok(())
 }
